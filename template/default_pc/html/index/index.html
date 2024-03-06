@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+ <head> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <meta http-equiv="x-ua-compatible" content="ie=edge,chrome=1" /> 
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" /> 
+  <meta name="format-detection" content="telephone=no" /> 
+  <title>{$maccms.site_name}</title>  
+  <meta name="description" content="{$maccms.site_description}" /> 
+  <meta name="keywords" content="{$maccms.site_keywords}" />
+  {include file="public/include"}
+ </head>
+ <body>
+  {include file="public/head"}
+  <div class="sy_yp container"> 
+   <div class="gy_bt"> 
+    <div class="l_m" style="background: url('{$maccms.path_tpl}html/style/images/img/bg_icon.png') no-repeat -20px -773px;">
+     视频
+    </div> 
+    <div class="hd"> 
+     <ul> 
+      <li>最热</li> 
+	  {maccms:type order="asc" by="sort" ids="child"}
+	  {if condition="$vo.type_pid eq 1"}
+      <li>{$vo.type_name}</li>
+	  {/if}
+	  {/maccms:type}
+     </ul> 
+    </div> 
+    <div class="more_btn"> 
+	 {maccms:type order="asc" by="sort" ids="1"}
+     <a href="{:mac_url_type($vo)}" class="gd_lm">更多视频</a> 
+	 {/maccms:type}
+	 {maccms:type order="asc" by="sort" ids="child"}
+	 {if condition="$vo.type_pid eq 1"}
+     <a href="{:mac_url_type($vo)}" class="gd_lm">更多{$vo.type_name}</a>
+	 {/if}
+	 {/maccms:type}
+    </div> 
+    <div class="clear"></div> 
+   </div> 
+   <div class="yp_nr"> 
+    <ul> 
+	{maccms:vod order="desc" by="hits" num="12" type="1"}
+     <li> 
+      <div class="t_p">
+       <a href="{:mac_url_vod_play($vo)}" target="_blank" rel="noopener noreferrer"><img class="lazy" data-original="{:mac_url_img($vo.vod_pic)}" src="{$maccms.path_tpl}html/style/img/lazylitpic.gif" /></a>
+       {notempty name="$vo.vod_duration"}<span>{$vo.vod_duration}</span>{/notempty}
+      </div> 
+      <div class="w_z"> 
+       <h3><a href="{:mac_url_vod_play($vo)}" target="_blank" rel="noopener noreferrer">{$vo.vod_name}</a></h3> 
+       <span>{$vo.vod_time|date="Y年m月d日",###}</span> 
+      </div> 
+      <div class="clear"></div> </li>  
+	{/maccms:vod}
+     <li class="navadz_index">
+      <script src="{$maccms.path_ads}navadz_index.js"></script>
+     </li>
+     <li class="navady_index">
+      <script src="{$maccms.path_ads}navady_index.js"></script>
+     </li> 
+    </ul> 
+	{maccms:type order="asc" by="sort" ids="child"}
+	{if condition="$vo.type_pid eq 1"}
+    <ul> 
+	 {maccms:vod order="desc" by="hits" num="12" type="'.$vo['type_id'].'" id="vo1" key="key1"}
+     <li> 
+      <div class="t_p">
+       <a href="{:mac_url_vod_play($vo1)}" target="_blank" rel="noopener noreferrer"><img data-original="{:mac_url_img($vo1.vod_pic)}" src="{$maccms.path_tpl}html/style/img/lazylitpic.gif" /></a>
+       {notempty name="$vo.vod_duration"}<span>{$vo.vod_duration}</span>{/notempty}
+      </div> 
+      <div class="w_z"> 
+       <h3><a href="{:mac_url_vod_play($vo1)}" target="_blank" rel="noopener noreferrer">{$vo1.vod_name}</a></h3> 
+       <span>{$vo1.vod_time|date="Y年m月d日",###}</span> 
+      </div> 
+      <div class="clear"></div> </li> 
+	 {/maccms:vod}
+     <li class="navadz_index"></li>
+     <li class="navady_index"></li> 
+    </ul> 
+	{/if}
+	{/maccms:type}
+   </div> 
+   <div class="clear"></div> 
+   <div class="gy_bt"> 
+    <div class="l_m" style="background: url('{$maccms.path_tpl}html/style/images/img/bg_icon.png') no-repeat -20px -773px;">
+     分类
+    </div> 
+    <div class="hd"> 
+     <ul> 
+	  {maccms:type order="asc" by="sort" ids="child"}
+	  {if condition="$vo.type_pid eq 1"}
+      <li><a href="{:mac_url_type($vo)}">{$vo.type_name}</a></li>
+	  {/if}
+	  {/maccms:type}
+     </ul> 
+    </div> 
+    <div class="clear"></div> 
+   </div> 
+  </div> 
+  <script type="text/javascript">
+  jQuery(".sy_yp").slide({mainCell:".yp_nr",targetCell:".more_btn a",trigger:"click",switchLoad:"data-original",delayTime:100,});
+</script> 
+  <div class="head_gg sy_sp container" id="gotoimage">
+   <script src="{$maccms.path_ads}sy_sp_gg.js"></script>
+  </div> 
+  <div class="sy_tc container"> 
+   <div class="gy_bt"> 
+    <div class="l_m" style="background: url('{$maccms.path_tpl}html/style/images/img/bg_icon.png') no-repeat -20px -613px;">
+     图片
+    </div> 
+	{maccms:type order="asc" by="sort" ids="2"}
+    <a href="{:mac_url_type($vo)}" class="gd_lm">更多图片</a> 
+    <a href="{:mac_url_type($vo)}" class="fy_lm"><img src="{$maccms.path_tpl}html/style/img/fy.png" /></a> 
+	{/maccms:type}
+    <div class="clear"></div> 
+   </div> 
+   <div class="tc_nr"> 
+    <ul> 
+	{maccms:art order="desc" by="time" type="2" num="8" }
+     <li> 
+      <div class="t_p">
+       <a href="{:mac_url_art_detail($vo)}" target="_blank" rel="noopener noreferrer"><img class="lazy" data-original="{:mac_url_img($vo.art_pic)}" src="{$maccms.path_tpl}html/style/img/lazylitpic.gif" /></a>
+       {notempty name="$vo.art_remarks"}<span>{$vo.art_remarks}</span>{/notempty}
+      </div> 
+      <div class="w_z"> 
+       <h3><a href="{:mac_url_art_detail($vo)}" target="_blank" rel="noopener noreferrer">{$vo.art_name}</a></h3> 
+       <span>{$vo.art_time|date="Y-m-d",###}</span> 
+      </div> 
+      <div class="clear"></div> </li> 
+	{/maccms:art}
+    </ul> 
+    <div class="clear"></div> 
+   </div> 
+  </div> 
+  <div class="head_gg sy_tp container" id="gotofiction">
+   <script src="{$maccms.path_ads}sy_tp_gg.js"></script>
+  </div>  
+  <div class="sy_xw container"> 
+   <div class="gy_bt"> 
+    <div class="l_m" style="background: url('{$maccms.path_tpl}html/style/images/img/bg_icon.png') no-repeat -20px -453px;">
+     小说
+    </div> 
+	{maccms:type order="asc" by="sort" ids="3"}
+    <a href="{:mac_url_type($vo)}" class="gd_lm">更多小说</a> 
+    <a href="{:mac_url_type($vo)}" class="fy_lm"><img src="{$maccms.path_tpl}html/style/img/fy.png" /></a> 
+	{/maccms:type}
+    <div class="clear"></div> 
+   </div> 
+   <div class="xw_nr"> 
+    <ul>
+	{maccms:art order="desc" by="time" type="3" num="10" }	
+     <li><span>{$vo.art_time|date="Y-m-d",###}</span><a href="{:mac_url_art_detail($vo)}" target="_blank" rel="noopener noreferrer">{$vo.art_name}</a></li> 
+	{/maccms:art}
+    </ul> 
+   </div> 
+  </div> 
+  <div class="head_gg sy_xs container">
+   <script src="{$maccms.path_ads}sy_xs_gg.js"></script>
+  </div> 
+  {include file="public/foot"}
+  <script type="text/javascript" src="{$maccms.path_tpl}html/style/js/main.js"></script> 
+  <div class="kj_dh"> 
+   <ul> 
+    <li><a href="#gotovideo" class="s_a">视频</a></li> 
+    <li><a href="#gotoimage" class="s_b">图片</a></li> 
+    <li><a href="#gotofiction" class="s_d">小说</a></li> 
+    <li><a href="javascript:;" class="f_h">返回顶部</a></li> 
+   </ul> 
+  </div>  
+ </body>
+</html>

@@ -1,0 +1,80 @@
+  <div class="top"> 
+   <div class="container"> 
+    <div class="sc_bz">
+     <!--<a href="javascript:void(0);" onclick="AddFavorite(document.title,location.href)">-->
+     <a class="upload_url" href="{:mac_url('user/index')}" target="_blank" rel="noopener noreferrer">会员中心</a>
+    </div> 
+    <div class="dz_zx">
+     <a class="url_page" href="{:url('user/findpass_msg')}?ac=email" target="_blank" rel="noopener noreferrer">找回密码</a>
+    </div> 
+    <div class="rj_xz">
+     <a class="app_link" href="{$GLOBALS['config']['extra']['appdown']}" target="_blank" rel="noopener noreferrer">APP下载</a>
+    </div> 
+    <div class="logo">
+     <a class="header_logo" href="/"><img src="/{$maccms.site_logo}" /></a>
+    </div> 
+    <div class="clear"></div> 
+   </div> 
+  </div> 
+  <div class="header"> 
+   <div class="container"> 
+    <div class="logo">
+     <a href="/"><img src="/{$maccms.site_logo}" /></a>
+    </div> 
+    <div class="menu"> 
+     <ul> 
+      <li class="a_n"><a href="javascript:;"><img src="{$maccms.path_tpl}html/style/img/an.png" /></a></li> 
+      <li class="on"><a href="/">首页</a></li> 
+	  {maccms:type order="asc" by="sort" ids="parent"}
+      <li><a href="{:mac_url_type($vo)}" target="_blank" rel="noopener noreferrer">{$vo.type_name}</a></li> 
+	  {/maccms:type}
+      <li><a href="{:mac_url('vod/search')}" target="_blank" rel="noopener noreferrer">搜索</a></li> 
+     </ul> 
+    </div> 
+    <div class="clear"></div> 
+   </div> 
+   <div class="lm_fl"> 
+    <div class="l_m">
+     栏目：
+    </div> 
+    <div class="f_l"> 
+     <ul> 
+	 {maccms:type order="asc" by="sort" ids="1" id="vo1" key="key1"}
+      <li><a href="{:mac_url_type($vo1)}" class="on" target="_blank" rel="noopener noreferrer">视频</a></li> 
+	  {maccms:type order="asc" by="sort" mid="1" ids="child"}
+	  {if condition="$vo.type_pid eq 1"}
+      <li><a href="{:mac_url_type($vo)}" target="_blank" rel="noopener noreferrer">{$vo.type_name}</a></li>
+	  {/if}
+	  {/maccms:type}
+	 {/maccms:type}
+     </ul> 
+    </div> 
+    <div class="f_l"> 
+     <ul> 
+	  {maccms:type order="asc" by="sort" ids="20" id="vo1" key="key1"}
+      <li><a href="{:mac_url_type($vo1)}" class="on" target="_blank" rel="noopener noreferrer">图片</a></li> 
+	  {maccms:type order="asc" by="sort" mid="2" ids="child"}
+	  {if condition="$vo.type_pid eq 20"}
+      <li><a href="{:mac_url_type($vo)}" target="_blank" rel="noopener noreferrer">{$vo.type_name}</a></li>
+	  {/if}
+	  {/maccms:type}
+	 {/maccms:type}
+     </ul> 
+    </div> 
+    <div class="f_l"> 
+     <ul> 
+	  {maccms:type order="asc" by="sort" ids="5" id="vo1" key="key1"}
+      <li><a href="{:mac_url_type($vo1)}" class="on" target="_blank" rel="noopener noreferrer">小说</a></li> 
+	  {maccms:type order="asc" by="sort" mid="2" ids="child"}
+	  {if condition="$vo.type_pid eq 5"}
+      <li><a href="{:mac_url_type($vo)}" target="_blank" rel="noopener noreferrer">{$vo.type_name}</a></li>
+	  {/if}
+	  {/maccms:type}
+	 {/maccms:type}	  
+     </ul> 
+    </div> 
+    <div class="clear"></div> 
+   </div> 
+  </div> 
+  <div class="container tipsforu" id="gotovideo">{$GLOBALS['config']['extra']['notice']}</div> 
+  <!-- head_ads --> 

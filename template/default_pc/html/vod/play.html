@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+ <head> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <meta http-equiv="x-ua-compatible" content="ie=edge,chrome=1" /> 
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" /> 
+  <meta name="format-detection" content="telephone=no" /> 
+  <title>{$obj.vod_name}_{$maccms.site_name}</title> 
+  <meta name="description" content="{$obj.vod_name} - 高清视频在线观看 - {$maccms.site_name}" /> 
+  <meta name="keywords" content="{$obj.vod_name} - 高清视频在线观看 - {$maccms.site_name}" />
+  <link rel="stylesheet" href="{$maccms.path_tpl}html/style/css/video-js.min.css" /> 
+  {include file="public/include"}
+  <style>
+	/*弹出层*/
+	.mac_pop_bg,.mac_pop_msg_bg{position: fixed; z-index: 129; left: 0;top: 0; width: 100%; height: 100%; background: rgba(0,0,0,.2);}
+	.mac_pop,.mac_pop_msg { z-index:99999; display: none; min-height: 20px; max-height: 750px; position: fixed;  top: 0;  left: 0;  bottom: 0;  right: 0;  margin: auto;  padding: 25px;  z-index: 130;  border-radius: 8px;  background-color: #141414;  box-shadow: 0 3px 18px rgba(0, 0, 0, .5);}
+	
+	.mac_pop .pop_top{  height:40px;  width:100%;  border-bottom: 1px #E5E5E5 solid;}
+	.mac_pop .pop_top h2{  float: left; display:block;margin: 0;font-size: 18px;font-weight: normal;font-family:"microsoft yahei";}
+	.mac_pop span.pop_close{  float: right;width: 23px;height: 23px;font-size: 0;text-indent: 9999; cursor: pointer;  font-weight: bold; display:block;background: url("/static/images/home/background.png") -10px 0 no-repeat;}
+	
+	.mac_pop_msg .pop-msg{  text-align:center;  font-size: 14px;  }
+    .gbook_form .msg_cue{margin: 0 0 10px;}
+    .gbook_form .msg_code{margin-top:10px;}
+	.gbook_content {width: 100% !important;border: 1px #E5E5E5 solid;border-radius: 2px;padding: 10px 10px 0;color: #fafafa;box-sizing: border-box;}
+	.msg_code input{height: 30px;border: 1px solid #e5e5e5;border-radius: 3px;}
+	.mac_verify_img{pointer-events: unset !important;height: 30px;vertical-align: middle;}
+	.remaining-w.fr{float:right;}
+   
+    .mac_report .gbook_submit{background-color: #ff9c1d;border-radius: 30px;}
+	@media (max-width: 767px){.mac_pop{width:95% !important;box-sizing: border-box;height: 360px !important;}.remaining-w.fr{float:initial;}}
+  </style>
+  <style>#playleft iframe{border: 0 !important;}.sp_cnt{max-width: 100%;}</style>
+ </head>
+ <body>
+  {include file="public/head"}
+  <div class="yp_wz container"> 
+   <div class="yp_pr">
+    <a href="/">主页</a> &gt; 
+    <a href="{:mac_url_type($obj.type_1)}">{$obj.type_1.type_name}</a> &gt; 
+    <a href="{:mac_url_type($obj.type)}">{$obj.type.type_name}</a>
+   </div> 
+   <div class="yp_bt"> 
+    <h1>{$obj.vod_name}</h1> 
+    <span>看不到播放按钮请刷新页面重试</span> 
+   </div> 
+   <div class="yp_nr"> 
+    <div class="g_g zb_gg">
+     <script src="{$maccms.path_ads}zb_gg.js"></script>
+    </div> 
+    <div class="y_p" style="height: 300px;"> 
+     {$player_data}
+	 {$player_js} 
+     <div class="t_s">
+      <a href="javascript:;" onclick="MAC.Gbook.Report('编号【{$obj.vod_id}】名称【{$obj.vod_name}】不能观看请检查修复，页面地址' + location.href)">看不了片反馈？</a>
+     </div> 
+     <div class="r_k">
+      <a href="javascript:void(0);" onclick="AddFavorite(document.title,location.href)" class="domainslogn_palyer">最新域名：</a>
+     </div> 
+     <div class="clear"></div> 
+    </div> 
+    <div class="g_g yb_gg">
+     <script src="{$maccms.path_ads}yb_gg.js"></script>
+    </div> 
+    <div class="clear"></div> 
+   </div> 
+  </div> 
+  <div class="head_gg center container">
+   <script src="{$maccms.path_ads}center.js"></script>
+  </div> 
+  <div class="sp_kj container"> 
+   <div class="x_z">
+    <a href="{$obj.vod_down_url}" target="_blank" rel="noopener noreferrer"><img src="{$maccms.path_tpl}html/style/img/a5.png" />视频下载</a>
+   </div> 
+   <div class="f_x"> 
+    <i>本页网址</i> 
+    <span id="page_target" style="overflow:hidden;"></span> 
+    <button type="button" data-clipboard-action="copy" data-clipboard-target="#page_target" id="copy_page_btn">复制分享</button> 
+    <div class="clear"></div> 
+   </div> 
+   <div class="x_z">
+    <a class="app_link" href="{$GLOBALS['config']['extra']['appdown']}" target="_blank" rel="noopener noreferrer"><img src="{$maccms.path_tpl}html/style/img/a7.png" />APP下载</a>
+   </div> 
+   <div class="x_z m_n">
+    <a class="help_link" href="#" target="_blank" rel="noopener noreferrer"><img src="{$maccms.path_tpl}html/style/img/a8.png" />常见问题</a>
+   </div> 
+   <div class="clear"></div> 
+  </div> 
+  <div class="gd_bq container"> 
+   <div class="gy_bt"> 
+    <div class="l_m p_n">
+     标签
+    </div> 
+    <div class="clear"></div> 
+   </div> 
+   <div class="b_q"> 
+	{notempty name="$obj.vod_tag"}{$obj.vod_tag|mac_url_create='tag'}{/notempty}
+    <div class="clear"></div> 
+    <div class="sp_cnt" style="width:100%;margin:0 auto;">
+     {$obj.vod_content}
+    </div> 
+    <div class="clear"></div> 
+   </div> 
+   <div class="g_d">
+    <span class="z_k">展开查看更多</span>
+    <span class="s_q">收起查看内容</span>
+   </div> 
+  </div> 
+  <div class="sy_yp container"> 
+   <div class="gy_bt"> 
+	{maccms:type order="asc" by="sort" ids="'.$obj['type_id_1'].'"}
+    <div class="l_m p_n">
+     口味推荐
+    </div> 
+    <div class="z_y"> 
+     <div class="more_btn"> 
+      <a href="{:mac_url_type($vo)}" class="gd_lm">更多视频</a> 
+     </div> 
+    </div> 
+    <a href="{:mac_url_type($vo)}" class="fy_lm"><img src="{$maccms.path_tpl}html/style/img/fy.png" /></a> 
+    <div class="clear"></div> 
+	{/maccms:type}
+   </div> 
+   <div class="yp_nr l_b"> 
+    <ul> 
+	{maccms:vod order="desc" by="rnd" num="8"}	
+     <li> 
+      <div class="t_p">
+       <a href="{:mac_url_vod_play($vo)}" target="_blank" rel="noopener noreferrer"><img class="lazy" data-original="{:mac_url_img($vo.vod_pic)}" src="{$maccms.path_tpl}html/style/img/lazylitpic.gif" /></a>
+       {notempty name="$vo.vod_duration"}<span>{$vo.vod_duration}</span>{/notempty}
+      </div> 
+      <div class="w_z"> 
+       <h3><a href="{:mac_url_vod_play($vo)}" target="_blank" rel="noopener noreferrer">{$vo.vod_name}</a></h3> 
+       <span>{$vo.vod_time|date="Y-m-d",###}</span> 
+      </div> 
+      <div class="clear"></div> </li> 
+	{/maccms:vod}
+    </ul> 
+    <div class="clear"></div> 
+   </div> 
+  </div> 
+  <div class="head_gg bottom container">
+   <script src="{$maccms.path_ads}bottom.js"></script>
+  </div> 
+  <div class="yp_ts container"> 
+   <div class="w_z"> 
+    <p>注：部分地区及运营商会暂时或长久屏蔽8X播放线路，造成无法播放敬请谅解，我们会及时处理敬请耐心等候 特别提醒：我们永久提倡保护未成年人，强烈谴责虐童以及儿童性侵，杜绝此类影片传播</p> 
+    <h3>若你未满18周岁，请立即关闭离开！</h3> 
+   </div> 
+  </div>
+  <span style="display:none" class="mac_ulog_set" alt="设置播放页浏览记录" data-type="4" data-mid="{$maccms.mid}" data-id="{$obj.vod_id}" data-sid="{$param.sid}" data-nid="{$param.nid}"></span>
+  {include file="public/foot"}
+  <script type="text/javascript" src="{$maccms.path_tpl}html/style/js/main.js"></script> 
+  <div class="kj_dh"> 
+   <ul> 
+    <li><a href="javascript:;" class="f_h">返回顶部</a></li> 
+   </ul> 
+  </div> 
+  <script>
+  $(".menu li:eq(1)").removeClass();
+  $(".menu li:eq(2)").toggleClass("on");
+</script>   
+ </body>
+</html>

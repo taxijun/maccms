@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+ <head> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <meta http-equiv="x-ua-compatible" content="ie=edge,chrome=1" /> 
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" /> 
+  <meta name="format-detection" content="telephone=no" /> 
+  <title>{$obj.art_name}_{$maccms.site_name}</title> 
+  <meta name="description" content="{$obj.type_des}" /> 
+  <meta name="keywords" content="{$obj.type_key}" /> 
+  {include file="public/include"}
+ </head>
+ <body>
+  {include file="public/head"}
+  <div class="yp_wz container"> 
+   <div class="yp_pr"> 
+    <div class="b_q">
+     <a href="/">主页</a> > 
+     <a href="{:mac_url_type($obj.type_1)}">{$obj.type_1.type_name}</a> > 
+     <a href="{:mac_url_type($obj.type)}">{$obj.type.type_name}</a>
+    </div> 
+    <div class="clear"></div> 
+   </div> 
+   <div class="yy_nr"> 
+    <div class="y_p_f_f"> 
+     <div class="b_t_f"> 
+      <h1>{$obj.art_name} - {$obj.art_page_list[$param['page']]['title']}</h1> 
+      <span>{$obj.art_time|date="Y-m-d",###}</span> 
+     </div> 
+     <div class="n_r_f"> 
+      <div style="margin-top: 15px;"> 
+       <span style="font-size:20px;">
+		{$obj.art_page_list[$param['page']]['content']}
+        <div class="clear"></div> </span>
+      </div> 
+	 </div>
+      <div class="page_navi">
+	  {if condition="$__PAGING__.record_total gt 0"}
+       <a class="pageinfo">共{$__PAGING__.page_total}页: </a>
+       <a class="pagenum extend" href="{$__PAGING__.page_url|mac_url_page=$__PAGING__.page_prev}">上一页</a>
+	   {maccms:foreach name="$__PAGING__.page_num" id="num"}
+       {if condition="$__PAGING__['page_current'] eq $num"}
+       <a class="pagenum extend current" href="javascript:;" title="第{$num}页">{$num}</a>
+	   {else}
+       <a class="pagenum extend" href="{$__PAGING__.page_url|mac_url_page=$num}" title="第{$num}页">{$num}</a>
+       {/if}
+       {/maccms:foreach}
+       <a class="pagenum extend" href="{$__PAGING__.page_url|mac_url_page=$__PAGING__.page_next}">下一页</a>
+	  {/if}
+      </div> 
+      <div class="clear"></div> 
+     </div> 
+     <div class="clear"></div> 
+    </div> 
+   </div> 
+   <div class="clear"></div> 
+   <div class="sj_tp container"> 
+    <div class="f_x"> 
+     <i>本页网址</i> 
+     <span id="page_target"></span> 
+     <button type="button" data-clipboard-action="copy" data-clipboard-target="#page_target" id="copy_page_btn">复制分享</button> 
+     <div class="clear"></div> 
+    </div> 
+    <div class="gy_bt"> 
+     <div class="l_m p_n">
+      标签
+     </div> 
+     <div class="clear"></div> 
+    </div> 
+    <div class="b_q"> 
+	 {notempty name="$obj.art_tag"}{$obj.art_tag|mac_url_create='tag'}{/notempty}
+     <div class="clear"></div> 
+    </div> 
+   </div> 
+   <div class="sy_xw container"> 
+    <div class="gy_bt"> 
+	{maccms:type order="asc" by="sort" ids="'.$obj['type_id_1'].'"}
+     <div class="l_m p_n">
+      口味推荐
+     </div> 
+     <div class="z_y"> 
+      <div class="more_btn"> 
+       <a href="{:mac_url_type($vo)}" class="gd_lm">更多小说</a> 
+      </div> 
+     </div> 
+     <a href="{:mac_url_type($vo)}" class="fy_lm"><img src="{$maccms.path_tpl}html/style/img/fy.png" /></a> 
+     <div class="clear"></div> 
+	{/maccms:type}
+    </div> 
+    <div class="xw_nr"> 
+     <ul>
+	 
+	 {maccms:art order="desc" by="hits_day" type="'.$obj['type_id_1'].'" num="8" }	 
+      <li><span>{$vo.art_time|date="Y-m-d",###}</span><a href="{:mac_url_art_detail($vo)}" target="_blank" rel="noopener noreferrer">{$vo.art_name}</a></li> 
+	 {/maccms:art}
+     </ul> 
+     <div class="clear"></div> 
+    </div> 
+   </div> 
+   <div class="head_gg center container">
+    <script src="{$maccms.path_ads}center.js"></script>
+   </div> 
+  <div class="sy_yp container"> 
+   <div class="gy_bt"> 
+	{maccms:type order="asc" by="sort" ids="1"}
+    <div class="l_m p_n">
+     看视频
+    </div> 
+    <div class="z_y"> 
+     <div class="more_btn"> 
+      <a href="{:mac_url_type($vo)}" class="gd_lm">更多视频</a> 
+     </div> 
+    </div> 
+    <a href="{:mac_url_type($vo)}" class="fy_lm"><img src="{$maccms.path_tpl}html/style/img/fy.png" /></a> 
+    <div class="clear"></div> 
+	{/maccms:type}
+   </div> 
+   <div class="yp_nr"> 
+    <ul>
+	{maccms:vod order="desc" by="rnd" num="8"}	
+     <li> 
+      <div class="t_p">
+       <a href="{:mac_url_vod_play($vo)}" target="_blank" rel="noopener noreferrer"><img class="lazy" data-original="{:mac_url_img($vo.vod_pic)}" src="{$maccms.path_tpl}html/style/img/lazylitpic.gif" /></a>
+       {notempty name="$vo.vod_duration"}<span>{$vo.vod_duration}</span>{/notempty}
+      </div> 
+      <div class="w_z"> 
+       <h3><a href="{:mac_url_vod_play($vo)}" target="_blank" rel="noopener noreferrer">{$vo.vod_name}</a></h3> 
+       <span>{$vo.vod_time|date="Y-m-d",###}</span> 
+      </div> 
+      <div class="clear"></div> </li> 
+	{/maccms:vod}
+    </ul> 
+    <div class="clear"></div> 
+   </div> 
+  </div> 
+   <div class="head_gg bottom container">
+    <script src="{$maccms.path_ads}bottom.js"></script>
+   </div> 
+	<span style="display:none" class="mac_ulog_set" alt="设置内容页浏览记录" data-type="1" data-mid="{$maccms.mid}" data-id="{$obj.art_id}" data-sid="" data-nid=""></span>
+	<span style="display:none" class="mac_history_set" alt="设置History历史记录" data-name="[{$obj.type.type_name}]{$obj.art_name}" data-pic="{$obj.art_pic|mac_url_img}"></span>
+   {include file="public/foot"}
+   <script type="text/javascript" src="{$maccms.path_tpl}html/style/js/main.js"></script> 
+   <div class="kj_dh"> 
+    <ul> 
+     <li><a href="javascript:;" class="f_h">返回顶部</a></li> 
+    </ul> 
+   </div> 
+   <script type="text/javascript">
+  $(".menu li:eq(1)").removeClass();
+  $(".menu li:eq(4)").toggleClass("on");
+</script>   
+ </body>
+</html>

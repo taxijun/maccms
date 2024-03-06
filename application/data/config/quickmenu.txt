@@ -1,0 +1,7 @@
+更新日志,//www.maccms.com/doc/v10/log.html
+视频管理,vod/data
+萌芽采集资源,mycj/union
+Far采集插件,/addons/caiji/98k.php
+Fuck资源采集,fuckcj/union
+小黄鸭采集插件,Cjxhy/index
+MyTheme主题,/template/mytheme/admin/index.php

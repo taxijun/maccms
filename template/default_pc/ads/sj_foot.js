@@ -1,0 +1,1 @@
+document.write('<a href=\"https://www.huzhan.com/ishop12164\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"tellpc\" style=\"padding:11% 50%;background:url(https://sccdbyx.com/PageBottomMoblie_20190314.gif) no-repeat;background-size:contain;background-position:top;\"></a>');

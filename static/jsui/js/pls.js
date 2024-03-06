@@ -1,0 +1,1 @@
+document.writeln("<div align=\"center\" style=\" height:30px;\"> <a href=\"https:\/\/jsui.cn\" target=\"_blank\"> <font color=\"#000000\" size=\"5\" style=\"text-align:center\"> <strong style=\"font-size: 13px;\">广告：★ 点击获取精品模板<\/strong><\/font> <\/a><\/div>");

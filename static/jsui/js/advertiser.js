@@ -1,0 +1,2 @@
+
+var advertiser = "1";

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+ <head> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <meta http-equiv="x-ua-compatible" content="ie=edge,chrome=1" /> 
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" /> 
+  <meta name="format-detection" content="telephone=no" /> 
+  <title>{$obj.art_name}_{$maccms.site_name}</title> 
+  <meta name="description" content="{$obj.type_des}" /> 
+  <meta name="keywords" content="{$obj.type_key}" /> 
+  {include file="public/include"}
+  <link href="{$maccms.path_tpl}html/style/css/viewer.min.css" rel="stylesheet" /> 
+  <style>
+    .viewer-download {
+      color: #fff;
+      font-family: FontAwesome, serif;
+      font-size: 0.75rem;
+      line-height: 1.5rem;
+      text-align: center;
+    }
+
+    .viewer-download::before {
+      content: "\f019";
+    }
+</style>
+ </head>
+ <body>
+  {include file="public/head"}
+  <div class="yp_wz container"> 
+   <div class="yp_pr">
+    <a href="/">主页</a> &gt; 
+    <a href="{:mac_url_type($obj.type_1)}">{$obj.type_1.type_name}</a> &gt; 
+    <a href="{:mac_url_type($obj.type)}">{$obj.type.type_name}</a>
+   </div> 
+   <div class="yy_nr"> 
+    <div class="y_p_f"> 
+     <div class="b_t_f"> 
+      <h1>{$obj.art_name}</h1> 
+      <span>点击图片浏览 - {$obj.art_time|date="Y-m-d",###} - 无图请刷新</span> 
+     </div> 
+     <div class="pc_ban"> 
+      <div id="image_show"> 
+       <h2 style="font-size:18px;text-align:center;padding:3px;"><strong style="color:#f90;">轻触图片</strong>即可进入相册浏览模式</h2> 
+       {$obj.art_content}
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="clear"></div> 
+  </div> 
+  <div class="sj_tp container"> 
+   <div class="f_x"> 
+    <i>本页网址</i> 
+    <span id="page_target"></span> 
+    <button type="button" data-clipboard-action="copy" data-clipboard-target="#page_target" id="copy_page_btn">复制分享</button> 
+    <div class="clear"></div> 
+   </div> 
+   <div class="gy_bt"> 
+    <div class="l_m p_n">
+     标签
+    </div> 
+    <div class="clear"></div> 
+   </div> 
+   <div class="b_q"> 
+	{notempty name="$obj.art_tag"}{$obj.art_tag|mac_url_create='tag'}{/notempty}
+    <div class="clear"></div> 
+   </div> 
+  </div> 
+  <div class="sy_tc container"> 
+   <div class="gy_bt"> 
+	{maccms:type order="asc" by="sort" ids="'.$obj['type_id_1'].'"}	
+    <div class="l_m p_n">
+     口味推荐
+    </div> 
+    <div class="z_y"> 
+     <div class="more_btn"> 
+      <a href="{:mac_url_type($vo)}" class="gd_lm">更多图片</a> 
+     </div> 
+    </div> 
+    <a href="{:mac_url_type($vo)}" class="fy_lm"><img src="{$maccms.path_tpl}html/style/img/fy.png" /></a> 
+    <div class="clear"></div> 
+	{/maccms:type}
+   </div> 
+   <div class="tc_nr"> 
+    <ul> 
+	{maccms:art order="desc" by="hits_day" type="'.$obj['type_id_1'].'" num="8" }
+     <li> 
+      <div class="t_p">
+       <a href="{:mac_url_art_detail($vo)}" target="_blank" rel="noopener noreferrer"><img class="lazy" data-original="{:mac_url_img($vo.art_pic)}" src="{$maccms.path_tpl}html/style/img/lazylitpic.gif" /></a>
+       {notempty name="$vo.art_remarks"}<span>{$vo.art_remarks}</span>{/notempty}
+      </div> 
+      <div class="w_z"> 
+       <h3><a href="{:mac_url_art_detail($vo)}" target="_blank" rel="noopener noreferrer">{$vo.art_name}</a></h3> 
+       <span>{$vo.art_time|date="Y-m-d",###}</span> 
+      </div> 
+      <div class="clear"></div> </li> 
+	{/maccms:art}
+    </ul> 
+    <div class="clear"></div> 
+   </div> 
+  </div> 
+  <div class="head_gg center container">
+   <script src="{$maccms.path_ads}center.js"></script>
+  </div> 
+  <div class="sy_yp container"> 
+   <div class="gy_bt"> 
+	{maccms:type order="asc" by="sort" ids="1"}
+    <div class="l_m p_n">
+     看视频
+    </div> 
+    <div class="z_y"> 
+     <div class="more_btn"> 
+      <a href="{:mac_url_type($vo)}" class="gd_lm">更多视频</a> 
+     </div> 
+    </div> 
+    <a href="{:mac_url_type($vo)}" class="fy_lm"><img src="{$maccms.path_tpl}html/style/img/fy.png" /></a> 
+    <div class="clear"></div> 
+	{/maccms:type}
+   </div> 
+   <div class="yp_nr"> 
+    <ul>
+	{maccms:vod order="desc" by="rnd" num="8"}	
+     <li> 
+      <div class="t_p">
+       <a href="{:mac_url_vod_play($vo)}" target="_blank" rel="noopener noreferrer"><img class="lazy" data-original="{:mac_url_img($vo.vod_pic)}" src="{$maccms.path_tpl}html/style/img/lazylitpic.gif" /></a>
+       {notempty name="$vo.vod_duration"}<span>{$vo.vod_duration}</span>{/notempty}
+      </div> 
+      <div class="w_z"> 
+       <h3><a href="{:mac_url_vod_play($vo)}" target="_blank" rel="noopener noreferrer">{$vo.vod_name}</a></h3> 
+       <span>{$vo.vod_time|date="Y-m-d",###}</span> 
+      </div> 
+      <div class="clear"></div> </li> 
+	{/maccms:vod}
+    </ul> 
+    <div class="clear"></div> 
+   </div> 
+  </div> 
+  <div class="head_gg bottom container">
+   <script src="{$maccms.path_ads}bottom.js"></script>
+  </div> 
+	<span style="display:none" class="mac_ulog_set" alt="设置内容页浏览记录" data-type="1" data-mid="{$maccms.mid}" data-id="{$obj.art_id}" data-sid="" data-nid=""></span>
+	<span style="display:none" class="mac_history_set" alt="设置History历史记录" data-name="[{$obj.type.type_name}]{$obj.art_name}" data-pic="{$obj.art_pic|mac_url_img}"></span>
+  {include file="public/foot"}
+  <script type="text/javascript" src="{$maccms.path_tpl}html/style/js/main.js"></script> 
+  <div class="kj_dh"> 
+   <ul> 
+    <li><a href="javascript:;" class="f_h">返回顶部</a></li> 
+   </ul> 
+  </div> 
+  <script src="{$maccms.path_tpl}html/style/js/viewer.min.js"></script> 
+  <script>
+  window.addEventListener('DOMContentLoaded', function () {
+    var galley = document.getElementById('image_show');
+    var viewer = new Viewer(galley, {
+      url: 'data-original',
+      toolbar: {
+        zoomIn: 1,
+        zoomOut: 1,
+        oneToOne: true,
+        reset: 1,
+        prev: function () {
+          viewer.prev(true);
+        },
+        play: {
+          show: 1,
+          size: 'large',
+        },
+        next: function () {
+          viewer.next(true);
+        },
+        rotateLeft: 1,
+        rotateRight: 1,
+        flipHorizontal: 1,
+        flipVertical: 1,
+      },
+    });
+    const gallery = new Viewer(document.getElementById('image_show'));
+  });
+  $(".menu li:eq(1)").removeClass();
+  $(".menu li:eq(3)").toggleClass("on");
+</script>  
+ </body>
+</html>

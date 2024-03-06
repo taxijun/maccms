@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta charset="utf-8" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no" />
+  <meta name="theme-color" content="#000000" />
+  <link rel="manifest" href="/manifest.json" />
+  <title>{$maccms.site_name}_搜爱看的片</title>
+  <meta name="description" content="视频搜索引擎" />
+  <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-touch-fullscreen" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <link href="{$maccms.path_tpl}html/style/css/search.css" rel="stylesheet" />
+  <style data-jss="" data-meta="MuiModal">
+.jss2 {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1300;
+  position: fixed;
+}
+.jss3 {
+  visibility: hidden;
+}
+</style>
+  <style data-jss="">
+.jss1 {
+  width: 400px;
+  padding: 32px;
+  outline: none;
+  position: absolute;
+  box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2),0px 5px 8px 0px rgba(0,0,0,0.14),0px 1px 14px 0px rgba(0,0,0,0.12);
+  background-color: #fff;
+}
+</style>
+ </head>
+ <body style="">
+  <div id="root">
+   <div>
+    <header id="header" class="header">
+     <div class="container">
+      <h1 class="header__logo">快速搜片</h1>
+      <a href="/" target="_blank" rel="noopener noreferrer" class="header__ios-badge-link"><img class="header__ios-badge pull-right" src="/{$maccms.site_logo}" width="133px" /></a>
+     </div>
+    </header>
+    <form id="inputForm" class="form" name="search" method="get" action="{:mac_url('vod/search')}">
+     <div class="container">
+      <div class="form__field">
+       <input id="videoTitle" class="form__input" type="text" name="wd" placeholder="片名" autocomplete="on" autocorrect="on" spellcheck="false" value="" />
+      </div>
+     </div>
+     <div class="results">
+      <div class="disclaimer">
+       <div class="container">
+        <p class="disclaimer__text">输入关键词进行搜索</p>
+       </div>
+      </div>
+      <div class="result_list"></div>
+     </div>
+     <div class="action">
+      <div class="container">
+       <button type="submit" class="action__button">开始搜片</button>
+      </div>
+     </div>
+	</form>
+     {notempty name="$param.wd"}
+    <div class="items_container">
+     <ul>
+	 {maccms:vod num="16" paging="yes" pageurl="vod/search" order="desc" by="time"}
+      <li>
+       <div class="searh_item">
+        <a href="{:mac_url_vod_play($vo)}"><img src="{:mac_url_img($vo.vod_pic)}" alt="" /></a>
+       </div>
+       <div class="search_bottom_section">
+        <h3><a href="{:mac_url_vod_play($vo)}">{$vo.vod_name}</a></h3>
+       </div></li>
+	 {/maccms:vod}
+     </ul>
+    </div>
+    <div>
+     <div class="page_navi">
+	  {include file="public/paging"}
+      <div class="clear"></div>
+     </div>
+    </div>
+     {/notempty}
+    <div></div>
+    <div></div>
+   </div>
+  </div>
+ </body>
+</html>

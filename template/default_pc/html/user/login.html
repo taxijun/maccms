@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+ <head> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <meta http-equiv="x-ua-compatible" content="ie=edge,chrome=1" /> 
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" /> 
+  <meta name="format-detection" content="telephone=no" /> 
+  <title>用户登录 - {$maccms.site_name}</title> 
+  <meta name="keywords" content="用户登录,{$maccms.site_keywords}" /> 
+  <meta name="description" content="{$maccms.site_description}" />
+  {include file="user/include"}
+ </head>
+ <body>
+  {include file="user/head"}
+  <div class="sy_tc container" style="margin-bottom:20px;"> 
+     <div class="fed-main-info fed-min-width"> 
+       <div class="fed-part-case"> 
+        <div class="fed-part-layout fed-back-whits"> 
+         <div class="fed-user-login"> 
+          <div class="fed-list-head fed-part-rows fed-padding"> 
+           <h2 class="fed-font-xvii fed-text-center">会员登录</h2> 
+          </div> 
+          <form class="fed-user-form fed-user-width fed-part-rows" action="" method="post" id="fm"> 
+           <input class="fed-user-text fed-col-xs12" type="text" id="user_name" name="user_name" placeholder="请输入账号" maxlength="30" /> 
+           <input class="fed-user-text fed-col-xs12" type="password" id="user_pwd" name="user_pwd" placeholder="请输入密码" maxlength="20" /> {if condition="$GLOBALS['config']['user']['login_verify'] eq 1"} 
+           <input class="fed-user-text fed-col-xs8" type="tel" id="verify" name="verify" placeholder="请输入验证码" maxlength="4" /> 
+           <img class="fed-user-code fed-user-text fed-col-xs4" height="45" src="{:mac_url('verify/index')}" id="verify_img" onclick="this.src=this.src+'?'" title="看不清楚? 换一张！" /> {/if} 
+           <span class="fed-user-tips fed-text-gules fed-padding-v fed-visible fed-col-xs12">　</span> 
+           <input type="button" id="btn_submit" class="fed-subm-login fed-user-submit fed-rims-info fed-btns-info fed-btns-green fed-col-xs12" value="登录" /> 
+           <a class="fed-padding fed-col-xs3 fed-text-left" href="{:mac_url('user/reg')}">注册账号</a> {if condition="$GLOBALS['config']['connect']['qq']['status'] eq 1"} 
+           <a class="fed-padding fed-col-xs3 fed-text-center" href="{:mac_url('user/oauth')}?type=qq">QQ登录</a> {/if} {if condition="$GLOBALS['config']['connect']['weixin']['status'] eq 1"} 
+           <a class="fed-padding fed-col-xs3 fed-text-center" href="{:mac_url('user/oauth')}?type=weixin">微信登录</a> {/if} 
+           <a class="fed-padding fed-text-right" style="float:right" href="{:mac_url('user/findpass')}">忘记密码</a> 
+          </form> 
+         </div> 
+        </div> 
+       </div> 
+      </div> 
+  </div> 
+  {include file="user/foot"}
+  <script type="text/javascript" src="{$maccms.path_tpl}html/style/js/main.js"></script> 
+  <div class="kj_dh"> 
+   <ul> 
+    <li><a href="javascript:;" class="f_h">返回顶部</a></li> 
+   </ul> 
+  </div>
+  <script type="text/javascript">
+
+	$(function(){
+		$("body").bind('keyup',function(event) {
+			if(event.keyCode==13){ $('#btnLogin').click(); }
+		});
+		$('#btn_submit').click(function() {
+			if ($('#user_name').val()  == '') { alert('请输入用户！'); $("#user_name").focus(); return false; }
+			if ($('#user_pwd').val()  == '') { alert('请输入密码！'); $("#user_pwd").focus(); return false; }
+			if ($('#verify').length> 0 && $('#verify').val()  == '') { alert('请输入验证码！'); $("#verify").focus(); return false; }
+
+			$.ajax({
+				url: "{:mac_url('user/login')}",
+				type: "post",
+				dataType: "json",
+				data: $('#fm').serialize(),
+				beforeSend: function () {
+					$("#btn_submit").val("loading...");
+				},
+				success: function (r) {
+					if(r.code==1){
+						location.href="{:mac_url('user/index')}";
+					}
+					else{
+						alert(r.msg);
+						$('#verify_img').click();
+					}
+				},
+				complete: function () {
+					$("#btn_submit").val("立即登录");
+				}
+			});
+
+		});
+	});
+
+</script>   
+ </body>
+</html>

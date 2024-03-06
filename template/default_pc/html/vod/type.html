@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+ <head> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <meta http-equiv="x-ua-compatible" content="ie=edge,chrome=1" /> 
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" /> 
+  <meta name="format-detection" content="telephone=no" /> 
+  <title>{$obj.type_title}_{$maccms.site_name}</title> 
+  <meta name="description" content="{$obj.type_des}" /> 
+  <meta name="keywords" content="{$obj.type_key}" />  
+  <link rel="shortcut icon" href="/favicon.ico" />  
+  {include file="public/include"}
+ </head>
+ <body>
+  {include file="public/head"}
+  <div class="sy_tc container"> 
+   <div class="gy_bt h_x m_b"> 
+    <div class="l_m g_b" style="background: url('{$maccms.path_tpl}html/style/images/img/bg_icon.png') no-repeat -20px -693px;">
+     {$obj.type_name}
+    </div> 
+    <div class="f_l"> 
+     <ul> 
+	  {maccms:type ids="current" order="asc" by="sort"}
+	  {if condition="$obj.type_id eq $vo.type_id"}
+	  {else}
+      <li><a href="{:mac_url_type($vo)}" target="_blank" rel="noopener noreferrer">{$vo.type_name}</a></li>
+	  {/if}
+	  {/maccms:type}
+     </ul> 
+    </div> 
+    <div class="clear"></div> 
+   </div> 
+   <div class="tc_nr l_b"> 
+    <ul> 
+	{maccms:vod order="desc" by="time" num="16" paging="yes" pageurl="vod/type" half="5"}
+     <li> 
+      <div class="t_p">
+       <a href="{:mac_url_vod_play($vo)}" target="_blank" rel="noopener noreferrer"><img class="lazy" data-original="{:mac_url_img($vo.vod_pic)}" src="{$maccms.path_tpl}html/style/img/lazylitpic.gif" /></a>
+       {notempty name="$vo.vod_duration"}<span>{$vo.vod_duration}</span>{/notempty}
+      </div> 
+      <div class="w_z"> 
+       <h3><a href="{:mac_url_vod_play($vo)}" target="_blank" rel="noopener noreferrer">{$vo.vod_name}</a></h3> 
+       <span>{$vo.vod_time|date="Y年m月d日",###}</span> 
+      </div> 
+      <div class="clear"></div> </li>
+	{/maccms:vod}
+    </ul> 
+    <div class="clear"></div> 
+   </div> 
+   <div class="pg_nr"> 
+    <div class="page_navi"> 
+	{include file="public/paging"}
+     <div class="clear"></div> 
+    </div> 
+   </div> 
+  </div> 
+  <div class="head_gg bottom container">
+   <script src="{$maccms.path_ads}bottom.js"></script>
+  </div> 
+  {include file="public/foot"}
+  <script type="text/javascript" src="{$maccms.path_tpl}html/style/js/main.js"></script> 
+  <div class="kj_dh"> 
+   <ul> 
+    <li><a href="javascript:;" class="f_h">返回顶部</a></li> 
+   </ul> 
+  </div> 
+  <script type="text/javascript">
+  $(".menu li:eq(1)").removeClass();
+  $(".menu li:eq(2)").toggleClass("on");
+</script>  
+ </body>
+</html>
