@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:61:"/usr/local/html/cms/application/admin/view/index/welcome.html";i:1673451342;s:59:"/usr/local/html/cms/application/admin/view/public/head.html";i:1673451342;s:59:"/usr/local/html/cms/application/admin/view/public/foot.html";i:1673451342;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:61:"/usr/local/html/cms/application/admin/view/index/welcome.html";i:1709712225;s:59:"/usr/local/html/cms/application/admin/view/public/head.html";i:1709712225;s:59:"/usr/local/html/cms/application/admin/view/public/foot.html";i:1709712225;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
